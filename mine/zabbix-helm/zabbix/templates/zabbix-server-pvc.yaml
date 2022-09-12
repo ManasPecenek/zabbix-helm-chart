@@ -1,0 +1,14 @@
+{{- if .Values.zabbixserver.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-zabbix-server-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.zabbixserver.persistence.storage }}
+  storageClassName: {{ .Values.zabbixserver.persistence.storageClassName | quote }}
+{{- end }}
